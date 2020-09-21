@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import mycenter from './components/mycenter.vue'
+import mycenter from './components/cyf/mycenter.vue'
 
 export default {
   name: 'App',
