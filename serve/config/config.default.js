@@ -56,7 +56,7 @@ module.exports = appInfo => {
 			//数据库名
 			database: "bookstore"
 		}
-	}
+	};
 
 	//跨域配置
 	config.cors = {

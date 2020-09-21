@@ -13,6 +13,13 @@ class HomeController extends Controller {
     ctx.body = await ctx.service.home.test()
   }
   
+  async del() {
+    const { ctx } = this;
+	let data1 = this.ctx.request.body
+	console.log(data1)
+    ctx.body = await ctx.service.home.del(data1)
+  }
+  
   
   
 }

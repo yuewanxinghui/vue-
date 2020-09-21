@@ -1,16 +1,14 @@
 <template>
   <div id="app">
-    <mycenter></mycenter>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import mycenter from './components/cyf/mycenter.vue'
 
 export default {
   name: 'App',
   components: {
-	  mycenter
   }
 }
 </script>
