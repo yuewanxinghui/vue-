@@ -60,7 +60,17 @@ module.exports = appInfo => {
 
 	//跨域配置
 	config.cors = {
-		origin: 'http://192.168.3.116:8081',
+		// origin: '*',
+		// origin: 'http://192.168.3.124:8080',
+		origin: function (ctx) { //设置允许来自指定域名请求
+			console.log(ctx);
+			const whiteList = ['http://192.168.3.124:8080','http://192.168.3.116:8080','http://192.168.3.184:8080','http://192.168.3.142:8080']; 
+				let url = ctx.request.header.origin;
+			if (whiteList.includes(url)) {
+				return url;
+			}
+			return 'http://localhost' //默认允许本地请求3000端口可跨域
+		},
 		allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
 		credentials: true//后端会给去前端返回缓存数据包  告诉浏览器  去做缓存
 
