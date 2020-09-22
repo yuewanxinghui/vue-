@@ -4,6 +4,7 @@
 		密码：<input type="password" class='' placeholder="密码" v-model="pwd"><br>
 		再次确认密码：<input type="password" :class='{error:flag}' placeholder="确认密码" v-model="oncepwd" @blur="check">
 		<p v-if="flag">两次输入密码不一致</p>
+		<div class="yanzm">验证码：<input id='yzm' type="text" v-model="yanzhengma"><span v-html='svg' @click="again"></span></div>
 		<button class='zhuce' @click="zhuce">注册</button>
 		<p v-if="flag1">已有账号，请登录</p>
 	</div>
@@ -17,35 +18,44 @@
 				pwd: '',
 				oncepwd: '',
 				flag: false,
-				flag1:false
+				flag1: false,
+				svg: '',
+				yanzhengma: ''
 			}
 		},
 		mounted() {
-			// console.log([]==false)
-			// if (![1]) {
-			// 	console.log(1111)
-			// } else {
-			// 	console.log(22222)
-			// }
+			this.$axios.get('/verif')
+				.then((data) => {
+					this.svg = data.data.data
+				})
 		},
 		methods: {
-			zhuce() {
-				if(this.flag==false){	
-				this.$axios.post('/userzhuce', {
-						zhanghao: this.zhanghao,
-						pwd: this.pwd
-					})
+			again() {
+				this.$axios.get('/verif')
 					.then((data) => {
-						if(data.data.code==2001){
-							this.flag1=true;
-							setTimeout(()=>{
-							this.$router.push('/login');								
-							},2000)
-						}else if(data.data.code==2000){
-							alert('注册成功');
-							this.$router.push('/login');
-						}
+						this.svg = data.data.data
 					})
+			},
+			zhuce() {
+				if (this.zhanghao!==''&&this.pwd!==''&&this.oncepwd!==''&&this.yanzhengma!=='') {
+					this.$axios.post('/userzhuce', {
+							zhanghao: this.zhanghao,
+							pwd: this.pwd,
+							yzm: this.yanzhengma
+						})
+						.then((data) => {
+							if (data.data.code == 2001) {
+								this.flag1 = true;
+								setTimeout(() => {
+									this.$router.push('/login');
+								}, 2000)
+							} else if (data.data.code == 2000) {
+								alert('注册成功');
+								this.$router.push('/login');
+							}else if(data.data.code == 2003){
+								console.log(data.data.info)
+							}
+						})
 				}
 			},
 			check() {
@@ -63,6 +73,15 @@
 	* {
 		margin: 0;
 		padding: 0;
+	}
+	.yanzm{
+		margin-top: 20px;
+		display: flex;
+		align-items: center;
+	}
+	#yzm{
+		width: 30%;
+		height: 40px;
 	}
 
 	.box {

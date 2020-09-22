@@ -60,11 +60,19 @@ module.exports = appInfo => {
 
 	//跨域配置
 	config.cors = {
-		origin: '*',
-		allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
+		origin: 'http://192.168.3.116:8081',
+		allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+		credentials: true//后端会给去前端返回缓存数据包  告诉浏览器  去做缓存
+
 	};
 
-
+	//缓存配置
+	config.session = {
+		key: 'TXSM',
+		maxAge: 1000 * 3600 * 24,
+		httpOnly: true,
+		encrypt: true
+	}
 
 
 
