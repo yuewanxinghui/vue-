@@ -4,10 +4,10 @@
 			<div class="userimg">
 				<img src="../../../public/1.jpg" alt="">
 			</div>
-			<span>{{info1.name}}</span>
+			<span>{{info.name}}</span>
 		</div>
 		<div class='time'>{{nowtime|timetool}}</div>
-		<div class='exit'>exit</div>
+		<div class='exit' @click="clearcook">exit</div>
 	</div>
 </template>
 
@@ -19,7 +19,12 @@
 				info1: ''
 			}
 		},
+		props:['info'],
 		methods: {
+			clearcook(){
+				localStorage.setItem('loading',null)
+				localStorage.setItem('isLogin',false)
+			}
 
 		},
 		created() {
@@ -29,11 +34,7 @@
 			})
 		},
 		mounted() {
-			let url = 'http://192.168.3.124:7001/user';
-			this.$axios.get(url).then((data) => {
-				console.log(data.data)
-				this.info1 = data.data
-			})
+			
 		},
 		filters: {
 			timetool(e) {

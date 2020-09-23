@@ -29,7 +29,18 @@ class HomeService extends Service {
 		const {
 			ctx
 		} = this;
-		let sql = `UPDATE book SET price=${e.price},active='${e.active}' WHERE id=${e.id};`;
+		let sql = `UPDATE book SET price=${e.price},active='${e.active}' WHERE id=${e.id}`;
+		let result1 = await ctx.app.mysql.query(sql);
+		console.log(result1);
+		return result1;
+	}
+
+	//增加商品
+	async add(e) {
+		const {
+			ctx
+		} = this;
+		let sql = `INSERT  INTO book (bookname,bookpic,bookwriter,price,active,tid) VALUES('${e.bookname}', '${e.img}', '${e.bookwriter}',${e.price},'${e.active}',${e.tid})`;
 		let result1 = await ctx.app.mysql.query(sql);
 		console.log(result1);
 		return result1;

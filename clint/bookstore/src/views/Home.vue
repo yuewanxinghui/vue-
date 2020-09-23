@@ -4,7 +4,7 @@
 		<nav>
 			<div class="navleft">
 				<router-link class="navbtn" to="/Login">欢迎光临檀墨香坊</router-link>
-				<router-link class="navbtn" to="/mycenter">个人中心</router-link>
+				<router-link class="navbtn" to="/center">个人中心</router-link>
 				<router-link class="navbtn" to="/Login">购物车</router-link>
 			</div>
 

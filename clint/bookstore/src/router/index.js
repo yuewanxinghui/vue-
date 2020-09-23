@@ -11,9 +11,7 @@ const routes = [
 	},
 	{
 		path: '/Home',
-		component: () => import('../views/Home.vue'),
-		
-
+		component: () => import('../views/Home.vue'),	
 	},
 	{
 		path: '/center',
@@ -37,5 +35,20 @@ const router = new VueRouter({
 	mode: 'history',
 	routes
 });
+
+
+router.beforeEach((to1,from1,next)=>{
+	if(to1.path == '/'||to1.path == '/Home'||to1.path == '/login'||to1.path == '/zhuce'){
+		next();
+	}else{
+		let flag = localStorage.getItem('isLogin');
+		// console.log(flag)
+		if(flag){
+			next();
+		}else{
+			next('/login')
+		}
+	}
+})
 
 export default router;

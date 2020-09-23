@@ -31,9 +31,17 @@
 				this.$axios.post('/userlogin',{zhanghao:this.zhanghao,pwd:this.pwd})
 				.then((data)=>{
 					console.log(data)
+					// console.log(JSON.parse(data.config.data))
+					let loading = data.data[0].id;
+					console.log(loading)
+					if(loading){
+						localStorage.setItem("isLogin",true);
+						localStorage.setItem("loading",loading);
+						this.$router.push('Home')
+					}
 				})		
 				}else{
-					this.flag = true;
+					this.flag = true;//判断账号密码不能为空
 				}
 			}
 		}

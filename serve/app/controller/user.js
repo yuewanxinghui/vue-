@@ -8,6 +8,13 @@ class UserController extends Controller {
     const { ctx } = this;
     ctx.body = await ctx.service.user.usercar();
   }
+
+  //用户信息获取
+  async user() {
+    const { ctx } = this;
+    console.log(this.ctx.request.body);
+    ctx.body = await ctx.service.user.user(this.ctx.request.body);
+  }
   
   //查询用户登录
   async userlogin() {

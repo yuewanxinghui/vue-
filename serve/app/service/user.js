@@ -15,6 +15,17 @@ class UserService extends Service {
 		return result1;
 	}
 
+	//用户信息获取
+	async user(e) {
+		const {
+			ctx
+		} = this;
+		let sql = `select * from user where id=${e.id}`;
+		let result1 = await ctx.app.mysql.query(sql);
+		console.log(result1);
+		return result1;
+	}
+
 	//用户登录
 	async userlogin(e) {
 		const {
@@ -28,7 +39,9 @@ class UserService extends Service {
 		if (result1[0]) {
 			if (result1[0].zhanghao == e.zhanghao && result1[0].pwd == e.pwd) {
 				console.log(1111)
-				return {code:1000,info:"登录成功"}
+				// return {code:1000,info:"登录成功"};
+				return result1
+
 			} else if (result1[0].pwd !== e.pwd) {
 				return `密码或账号错误`
 			}
