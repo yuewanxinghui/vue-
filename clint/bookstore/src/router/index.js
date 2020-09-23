@@ -11,7 +11,31 @@ const routes = [
 	},
 	{
 		path: '/Home',
-		component: () => import('../views/Home.vue'),	
+		component: () => import('../views/Home.vue'),
+	},
+	{
+		path: '/wenxue',
+		component: () => import('../views/shangpinxiangqing/wenxue.vue')
+	},
+	{
+		path: '/sheke',
+		component: () => import('../views/shangpinxiangqing/sheke.vue')
+	},
+	{
+		path: '/shaoer',
+		component: () => import('../views/shangpinxiangqing/shaoer.vue')
+	},
+	{
+		path: '/yishu',
+		component: () => import('../views/shangpinxiangqing/yishu.vue')
+	},
+	{
+		path: '/shenghuo',
+		component: () => import('../views/shangpinxiangqing/shenghuo.vue')
+	},
+	{
+		path: '/wenjiao',
+		component: () => import('../views/shangpinxiangqing/wenjiao.vue')
 	},
 	{
 		path: '/center',
