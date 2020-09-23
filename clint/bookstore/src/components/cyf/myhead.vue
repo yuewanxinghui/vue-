@@ -2,7 +2,7 @@
 	<div class="box">
 		<div class='info'>
 			<div class="userimg">
-				<img src="../../../public/1.jpg" alt="">
+				<img :src="info.userimg" alt="">
 			</div>
 			<span>{{info.name}}</span>
 		</div>
@@ -22,8 +22,10 @@
 		props:['info'],
 		methods: {
 			clearcook(){
-				localStorage.setItem('loading',null)
-				localStorage.setItem('isLogin',false)
+				localStorage.setItem('loading',null);
+				localStorage.setItem('isLogin',0);
+				localStorage.setItem('admin',0);
+				this.$router.push('Home')
 			}
 
 		},

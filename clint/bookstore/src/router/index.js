@@ -4,8 +4,7 @@ import Home from '../views/Home.vue'
 
 Vue.use(VueRouter);
 
-const routes = [
-	{
+const routes = [{
 		path: '/',
 		component: Home
 	},
@@ -52,7 +51,12 @@ const routes = [
 	{
 		path: '/xiangqing',
 		component: () => import('../views/xiangqing.vue')
-	}
+	},
+	{
+		path: '/table1',
+		component: () => import('../components/ljm/table1.vue'),
+	},
+
 ];
 
 const router = new VueRouter({
@@ -61,15 +65,20 @@ const router = new VueRouter({
 });
 
 
-router.beforeEach((to1,from1,next)=>{
-	if(to1.path == '/'||to1.path == '/Home'||to1.path == '/login'||to1.path == '/zhuce'){
+router.beforeEach((to1, from1, next) => {
+	if (to1.path == '/' || to1.path == '/Home' || to1.path == '/login' || to1.path == '/zhuce') {
 		next();
-	}else{
+	} else {
 		let flag = localStorage.getItem('isLogin');
-		// console.log(flag)
-		if(flag){
+		let admin = localStorage.getItem("admin");
+		console.log(flag, admin)
+		if (admin == 1) {
+			next()
+		} else if (flag == 1) {
 			next();
-		}else{
+		} else if (flag == 0) {
+			next('/login')
+		} else {
 			next('/login')
 		}
 	}

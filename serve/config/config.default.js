@@ -64,7 +64,7 @@ module.exports = appInfo => {
 		// origin: 'http://192.168.3.124:8080',
 		origin: function (ctx) { //设置允许来自指定域名请求
 			console.log(ctx);
-			const whiteList = ['http://192.168.3.124:8080','http://192.168.3.116:8080','http://192.168.3.184:8080','http://192.168.3.142:8080','http://192.168.3.116:8082']; 
+			const whiteList = ['http://192.168.3.124:8080','http://192.168.3.116:8080','http://192.168.3.184:8080','http://192.168.3.142:8080','http://192.168.3.116:8082','http://192.168.3.116:8081']; 
 				let url = ctx.request.header.origin;
 			if (whiteList.includes(url)) {
 				return url;

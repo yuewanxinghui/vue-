@@ -4,14 +4,42 @@ const Service = require('egg').Service;
 const svgCaptcha = require('svg-captcha');
 class UserService extends Service {
 
-	//用户购物车
-	async usercar() {
+	//增加用户购物车
+	async usercar(e) {
+		const {
+			ctx
+		} = this;
+		let sql = `select * from usercar where name='${e.bookname}'`;
+		let result1 = await ctx.app.mysql.query(sql);
+		if(result1[0]){
+			return {code:5001,info:'已加入购物车'}
+		}else{
+			let sql = `INSERT  INTO usercar (name,  price,  img) VALUES('${e.bookname}', '${e.bookprice}', '${e.bookpic}')`;
+			let result2 = await ctx.app.mysql.query(sql);
+			// console.log(result1);
+			return result2;
+		}
+	}
+
+	//查询购物车
+	async lookusercar(e) {
 		const {
 			ctx
 		} = this;
 		let sql = `select * from usercar`;
 		let result1 = await ctx.app.mysql.query(sql);
-		console.log(result1);
+		// console.log(result1);
+		return result1;
+	}
+
+	//删除购物车
+	async delusercar(e) {
+		const {
+			ctx
+		} = this;
+		let sql = `DELETE FROM usercar WHERE id=${e.id}`;
+		let result1 = await ctx.app.mysql.query(sql);
+		// console.log(result1);
 		return result1;
 	}
 
@@ -26,6 +54,29 @@ class UserService extends Service {
 		return result1;
 	}
 
+	//更改用户信息
+	async changeuser(e) {
+		const {
+			ctx
+		} = this;
+		if(e.name&&e.headimg==''){
+			let sql = `update user set name='${e.name}' where id=${e.id}`;
+			let result1 = await ctx.app.mysql.query(sql);
+			console.log(result1);
+			return result1;
+		}else if(e.name==''&&e.headimg){
+			let sql = `update user set userimg='${e.headimg}' where id=${e.id}`;
+			let result1 = await ctx.app.mysql.query(sql);
+			console.log(result1);
+			return result1;
+		}else if(e.name&&e.headimg){
+			let sql = `update user set userimg='${e.headimg}',name='${e.name}' where id=${e.id}`;
+			let result1 = await ctx.app.mysql.query(sql);
+			console.log(result1);
+			return result1;
+		}
+	}
+
 	//用户登录
 	async userlogin(e) {
 		const {
@@ -34,19 +85,19 @@ class UserService extends Service {
 		let sql = `select * from user WHERE zhanghao=${e.zhanghao}`;
 		console.log(666)
 		let result1 = await ctx.app.mysql.query(sql);
-		console.log(result1);
+		// console.log(result1);
 		//返回的是查询到的数组
 		if (result1[0]) {
 			if (result1[0].zhanghao == e.zhanghao && result1[0].pwd == e.pwd) {
 				console.log(1111)
 				// return {code:1000,info:"登录成功"};
-				return result1
+				return result1;
 
 			} else if (result1[0].pwd !== e.pwd) {
-				return `密码或账号错误`
+				return {code:1001,info:'账号或密码错误'}
 			}
 		} else {
-			return {code:1001,info:"请先注册"};
+			return {code:1002,info:"请先注册"};
 		}
 	}
 
