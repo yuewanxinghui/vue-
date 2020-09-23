@@ -13,6 +13,16 @@ class HomeService extends Service {
 		return result1;
 	}
 
+	async onedata(e) {
+		const {
+			ctx
+		} = this;
+		// console.log(e.id)
+		let sql = `select * from book where bid=${e.id}`;
+		let result1 = await ctx.app.mysql.query(sql);
+		return result1;
+	}
+
 	//删除商品
 	async del(e) {
 		const {
@@ -20,7 +30,7 @@ class HomeService extends Service {
 		} = this;
 		let sql = `DELETE FROM book WHERE bid=${e.bid}`;
 		let result1 = await ctx.app.mysql.query(sql);
-		console.log(result1);
+		// console.log(result1);
 		return result1;
 	}
 
@@ -42,8 +52,23 @@ class HomeService extends Service {
 		} = this;
 		let sql = `INSERT  INTO book (bookname,bookpic,bookwriter,price,active,tid) VALUES('${e.bookname}', '${e.img}', '${e.bookwriter}',${e.price},'${e.active}',${e.tid})`;
 		let result1 = await ctx.app.mysql.query(sql);
-		console.log(result1);
+		// console.log(result1);
 		return result1;
+	}
+	
+	//模糊查询
+	async like(e) {
+		const {
+			ctx
+		} = this;
+		let sql = `select * from book WHERE bookname LIKE '%${e.likeword}%'`;
+		let result1 = await ctx.app.mysql.query(sql);
+		// console.log(result1);
+		if(result1[0]){
+		return result1;
+		}else{
+			return {code:4001,info:"没有此商品"}
+		}
 	}
 
 }
