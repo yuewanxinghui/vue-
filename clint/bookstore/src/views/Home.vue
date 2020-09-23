@@ -7,7 +7,6 @@
         <router-link class="navbtn" to="/center">个人中心</router-link>
         <router-link class="navbtn" to="/Login">购物车</router-link>
       </div>
-
       <div class="navright">
         <div>
           <router-link class="navbtn" to="/login">{{login}}</router-link>
@@ -25,8 +24,6 @@
         <router-link class="headersearch" to="/Home">搜索</router-link>
       </div>
     </header>
-    <!-- <article>hh</article> -->
-    <wenxue></wenxue>
     <section class="section">
       <div class="Allclassify">
         <router-link class="classify classify1" to="/Login">商品分类</router-link>
@@ -38,34 +35,15 @@
         <router-link class="classify" to="/shenghuo">生活</router-link>
         <router-link class="classify" to="/wenjiao">文教</router-link>
       </div>
-      <div class="shopingtip">
-        <ul>
-          <li>文学</li>
-          <li>社科</li>
-          <li>少儿</li>
-          <li>艺术</li>
-          <li>生活</li>
-          <li>文教</li>
-        </ul>
-      </div>
-      <div class="lunbotu">
-        <img :src="imges[currentIndex].imgs" alt @click="imgHandler" />
-        <button class="lunbotuleft" @click="prevHandler"><</button>
-        <button class="lunboturigth" @click="nextHandler">></button>
+      <div class="lbst">
+        <lunbo class="lunbo"></lunbo>
+        <shoptip class="shoptip" @click="toshoptip()"></shoptip>
       </div>
       <section class="hotsale">
         <img src="http://image31.bookschina.com/pro-images/newtejia/292120.jpg" alt srcset />
       </section>
       <section class="section2">
-        <div class="goodbooks" v-for="el in arr">
-          <div>
-            <img class="bookimg" :src="el.bookpic" @click="fn()" />
-            <img v-if="el.active!=null" class="hot" :src="hot" alt />
-            <p v-text="el.bookname"></p>
-            <p>作者：{{el.bookwriter}}</p>
-            <p class="price">价格：{{el.price}}元</p>
-          </div>
-        </div>
+        <addcar v-for="el in arr" :data1='el'></addcar>
       </section>
       <footer>
         <router-link class="footerxq" to="xiangqing">关于我们</router-link>
@@ -96,103 +74,50 @@
 
 <script>
 import axios from "axios";
-
+import Element from "element-ui";
+import { get } from "http";
 export default {
   name: "Home",
   data() {
     return {
-      imges: [
-        {
-          id: 1,
-          imgs:
-            "http://image31.bookschina.com/uploadfiles/images/14216_ad990.jpg?id=3",
-        },
-        {
-          id: 2,
-          imgs:
-            "http://image31.bookschina.com/uploadfiles/images/14261_ad990.jpg?id=5",
-        },
-        {
-          id: 3,
-          imgs:
-            "http://image31.bookschina.com/pro-images/200916fd/990360.jpg?id=21",
-        },
-        {
-          id: 4,
-          imgs:
-            "http://image31.bookschina.com/pro-images/200918sk/990360.jpg?id=21",
-        },
-      ],
-      currentIndex: 0,
       arr: [],
       hot: "http://image31.bookschina.com/pro-images/200916fd/tubiao45.png",
       login: "登录",
       zhuce: "注册",
-      flag: true,
+      pic: "",
+      zhanhao: "",
     };
   },
   components: {
-    wenxue: () => import("@/views/leftfenlei/wenxue.vue"),
+    lunbo: () => import("@/components/wgh/lunbo.vue"),
+    shoptip: () => import("@/views/leftfenlei/shoptip.vue"),
+    addcar: () => import("@/components/wgh/addcar.vue"),
   },
   methods: {
-    // 对象内容是js函数
-    nextHandler(e) {
-      console.log(e);
-      this.currentIndex++;
-      //更改图片地址
-      if (this.currentIndex == 4) {
-        //js的if判断语句
-        this.currentIndex = 0;
-      }
-    },
-    prevHandler(e) {
-      console.log(e);
-      this.currentIndex--;
-      //更改图片地址
-      if (this.currentIndex == 0) {
-        //js的if判断语句
-        this.currentIndex = 4;
-      }
-    },
-
-    imgHandler(e) {
-      // //每一个事件都有一个event对象, 冒泡阻止默认事件学的
-      console.log(e.target); //当前目标对象 <img src="img/1.jpg" alt>
-      console.log(this); //实例化里面的对象this 指的都是当前实例化对象
-    },
     fn() {
-      console.log(8888);
       this.$router.push("/xiangqing");
     },
+    toshoptip() {
+      this.$router.push("/Home/shoptip");
+    },
+
+   
   },
 
   async created() {
-    // this的指向问题 ************* 能用箭头函数不用匿名函数
-    //匿名函数改成箭头函数 this代指vue
-    // setInterval(() => {
-    //   for (let i = 0; i < this.imges.length; i++) {
-    //     if (this.currentIndex <= 4) {
-    //       this.currentIndex++;
-    //       return this.currentIndex;
-    //     } else {
-    //       this.currentIndex == 0;
-    //     }
-    //   }
-    // }, 2000);
-
     var res = await axios.get("/test");
     this.arr = res.data;
-    // console.log(this.arr);
-    // console.log(this.arr[0].active);
 
-    // var flag = localStorage.getItem("isLogin");
+    // var res1 = await axios.post("/likeword");
+    // console.log(res1);
 
-    if (this.flag) {
-      this.login = "登录";
-      this.zhuce = "注册";
-    } else {
+    var flag = localStorage.getItem("isLogin");
+    if (flag) {
       this.login = "头像";
       this.zhuce = "账号";
+    } else {
+      this.login = "登录";
+      this.zhuce = "注册";
     }
   },
 };
@@ -292,64 +217,22 @@ section {
   background-color: red;
   color: #fff;
 }
-.lunbotu {
-  width: 990px;
-  height: 420px;
-}
-section .lunbotu img {
-  width: 1000px;
-  height: 360px;
-}
-section .lunbotu {
-  margin-left: 380px;
+.lbst {
   position: relative;
 }
-
-.lunbotu .lunbotuleft {
-  position: absolute;
-  width: 50px;
-  opacity: 0.3;
-  height: 360px;
-  font-size: 60px;
-  top: 0;
-}
-.lunbotu .lunboturigth {
-  position: absolute;
-  width: 50px;
-  opacity: 0.5;
-  height: 360px;
-  font-size: 60px;
-  top: 0;
-  right: -10px;
-}
-.shopingtip {
-  box-sizing: border-box;
-  position: absolute;
-  width: 230px;
-  margin-left: 150px;
-  height: 360px;
-  background-color: #00535a;
-  opacity: 0.5;
-}
-.shopingtip ul li {
-  list-style: none;
-  width: 240px;
-  height: 45px;
-  margin: 10px 0;
-  font-weight: 700;
-  color: #fff;
-  margin-left: 0px;
-  text-align: center;
-  line-height: 45px;
-}
-.shopingtip ul li:hover {
-  background-color: #fff;
-  color: orangered;
+.lunbo {
+  margin-top: -20px;
+  margin-bottom: 40px;
 }
 .hotsale {
   margin: 0 auto;
   width: 1200px;
   height: 150px;
+}
+.shoptip {
+  position: absolute;
+  z-index: 2px;
+  top: 0px;
 }
 .section2 {
   display: flex;
@@ -362,7 +245,7 @@ section .lunbotu {
 .section2 .goodbooks div {
   text-align: center;
   width: 280px;
-  height: 350px;
+  height: 390px;
   box-shadow: 0px 0px 15px #ccc;
   margin: 10px 10px;
 }
@@ -384,10 +267,12 @@ section .lunbotu {
   font-weight: 300;
 }
 .section2 .goodbooks .price {
+  margin-left: -150px;
   font-size: 18px;
   font-weight: bold;
   color: red;
 }
+
 footer {
   border-top: 4px solid #55a6ab;
   height: 200px;

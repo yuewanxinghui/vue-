@@ -5,14 +5,7 @@
       <router-link class="backhome" to="/Home">返回主页</router-link>
     </div>
     <div class="wenxue">
-      <div class="wenxue1" v-for="el in arr">
-        <div class="wenxuelist" v-if="el.tid==5 ">
-          <img  :src="el.bookpic" alt />
-          <p v-text="el.bookname"></p>
-          <p>作者：{{el.bookwriter}}</p>
-          <p class="price">价格：{{el.price}}元</p>
-        </div>
-      </div>
+      <shenghuo v-for="el in arr" :data1="el"></shenghuo>
     </div>
   </div>
 </template>
@@ -25,6 +18,9 @@ export default {
       price: "",
       arr: [],
     };
+  },
+  components:{
+    shenghuo: () => import("@/components/wgh/shenghuo.vue"),
   },
   async created() {
     var res = await axios.get("/test");
@@ -61,7 +57,7 @@ export default {
 .wenxuelist {
   text-align: center;
   width: 240px;
-  height: 300px;
+  height: 340px;
   margin: 10px 5px;
   box-shadow: 0px 0px 20px gray;
   box-sizing: border-box;

@@ -12,6 +12,16 @@ const routes = [
 	{
 		path: '/Home',
 		component: () => import('../views/Home.vue'),
+		// children: [
+		// 	{
+		// 		path: 'shoptip',
+		// 		component: () => import('../views/leftfenlei/shoptip.vue'),
+		// 		children: [{
+		// 			path: 'wx1',
+		// 			component: () => import('../views/leftfenlei/wx.vue')
+		// 		}]
+		// 	}
+		// ]
 	},
 	{
 		path: '/wenxue',
@@ -52,7 +62,8 @@ const routes = [
 	{
 		path: '/xiangqing',
 		component: () => import('../views/xiangqing.vue')
-	}
+	},
+
 ];
 
 const router = new VueRouter({
@@ -61,15 +72,15 @@ const router = new VueRouter({
 });
 
 
-router.beforeEach((to1,from1,next)=>{
-	if(to1.path == '/'||to1.path == '/Home'||to1.path == '/login'||to1.path == '/zhuce'){
+router.beforeEach((to1, from1, next) => {
+	if (to1.path == '/' || to1.path == '/Home' || to1.path == '/login' || to1.path == '/zhuce') {
 		next();
-	}else{
+	} else {
 		let flag = localStorage.getItem('isLogin');
 		// console.log(flag)
-		if(flag){
+		if (flag) {
 			next();
-		}else{
+		} else {
 			next('/login')
 		}
 	}
