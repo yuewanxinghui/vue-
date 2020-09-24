@@ -23,7 +23,7 @@ class HomeController extends Controller {
 		const {
 			ctx
 		} = this;
-		console.log(this.ctx.request.body)
+		// console.log(this.ctx.request.body)
 		ctx.body = await ctx.service.home.onedata(this.ctx.request.body)
 	}
 
@@ -77,7 +77,7 @@ class HomeController extends Controller {
 			ctx
 		} = this;
 		let data1 = this.ctx.request.body
-		console.log(data1)
+		// console.log(data1)
 		ctx.body = await ctx.service.home.like(data1)
 	}
 

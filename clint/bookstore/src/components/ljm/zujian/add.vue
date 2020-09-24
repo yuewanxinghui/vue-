@@ -3,7 +3,7 @@
     <div>
       <table>
         <thead>
-          <th>序号</th>
+          <th  width="50px">序号</th>
           <th>书名</th>
           <th>活动</th>
           <th>作者</th>
@@ -14,7 +14,7 @@
         <tbody>
           <tr>
             <th>
-              <input type="text" v-model="bid" />
+              <input type="text" v-model="bid" width="50px"/>
             </th>
             <th>
               <input type="text" v-model="bookname" />
@@ -25,8 +25,8 @@
             <th>
               <input type="text" v-model="bookwriter" />
             </th>
-            <th class="thbox">
-              ￥<input type="text" v-model="price" />
+            <th >
+              <input type="text" v-model="price" />
             </th>
             <th>
               <input type="text" v-model="tid" />
@@ -53,7 +53,7 @@ export default {
       active: "",
       bookwriter: "",
       price: "",
-    tid: "",
+      tid: "",
       file: "",
       img1: "",
     };
@@ -115,11 +115,13 @@ td {
 
 th,
 td {
-  padding: 5px 8px;
+  padding: 2px;
 }
 input {
   outline: none;
   border: none;
+  width: 40px;
+  height: 40px;
 }
 .submitbox {
   width: 50px;

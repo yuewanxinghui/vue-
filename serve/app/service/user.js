@@ -43,6 +43,18 @@ class UserService extends Service {
 		return result1;
 	}
 
+
+	//用户信息获取所有
+	async userall(e) {
+		const {
+			ctx
+		} = this;
+		let sql = `select * from user`;
+		let result1 = await ctx.app.mysql.query(sql);
+		// console.log(result1);
+		return result1;
+	}
+
 	//用户信息获取
 	async user(e) {
 		const {
@@ -50,7 +62,7 @@ class UserService extends Service {
 		} = this;
 		let sql = `select * from user where id=${e.id}`;
 		let result1 = await ctx.app.mysql.query(sql);
-		console.log(result1);
+		// console.log(result1);
 		return result1;
 	}
 
@@ -62,17 +74,17 @@ class UserService extends Service {
 		if(e.name&&e.headimg==''){
 			let sql = `update user set name='${e.name}' where id=${e.id}`;
 			let result1 = await ctx.app.mysql.query(sql);
-			console.log(result1);
+			// console.log(result1);
 			return result1;
 		}else if(e.name==''&&e.headimg){
 			let sql = `update user set userimg='${e.headimg}' where id=${e.id}`;
 			let result1 = await ctx.app.mysql.query(sql);
-			console.log(result1);
+			// console.log(result1);
 			return result1;
 		}else if(e.name&&e.headimg){
 			let sql = `update user set userimg='${e.headimg}',name='${e.name}' where id=${e.id}`;
 			let result1 = await ctx.app.mysql.query(sql);
-			console.log(result1);
+			// console.log(result1);
 			return result1;
 		}
 	}
@@ -85,7 +97,8 @@ class UserService extends Service {
 		let sql = `select * from user WHERE zhanghao=${e.zhanghao}`;
 		console.log(666)
 		let result1 = await ctx.app.mysql.query(sql);
-		// console.log(result1);
+		console.log(result1,7777777777777777);
+		console.log(result1[0],888888888888)
 		//返回的是查询到的数组
 		if (result1[0]) {
 			if (result1[0].zhanghao == e.zhanghao && result1[0].pwd == e.pwd) {
@@ -106,14 +119,14 @@ class UserService extends Service {
 		const { ctx } = this;
 		console.log(e)
 		if (e.yzm.toUpperCase() != e.code1.toUpperCase()) {
-			console.log(111)
+			// console.log(111)
 			return { code: 2003, info: '验证码错误' }
 		} else {
 			let sql = `select * from user WHERE zhanghao=${e.zhanghao}`;
 			let result1 = await ctx.app.mysql.query(sql);
-			console.log(result1);
+			// console.log(result1);
 			if (result1[0]) {
-				console.log(1111)
+				// console.log(1111)
 				return {
 					code: 2001,
 					info: "已有账号,请登录"
@@ -121,7 +134,7 @@ class UserService extends Service {
 			} else {
 				let sql1 = `INSERT  INTO user (zhanghao,pwd) VALUES(${e.zhanghao}, ${e.pwd})`
 				let result2 = await ctx.app.mysql.query(sql1);
-				console.log(result2);
+				// console.log(result2);
 				return {
 					code: 2000,
 					info: "注册成功"

@@ -1,6 +1,6 @@
 <template>
   <div class="wenxuelist" v-if="data1.tid==3 ">
-    <img :src="data1.bookpic" alt />
+    <img :src="data1.bookpic" alt @click="xiangqing"/>
     <p v-text="data1.bookname"></p>
     <p>作者：{{data1.bookwriter}}</p>
     <p class="price">价格：{{data1.price}}元</p>
@@ -21,6 +21,9 @@ export default {
   props: ["data1"],
   mounted() {},
   methods: {
+	  xiangqing(){
+		  this.$router.push({path:'/xiangqing',query:this.data1})
+	  },
     async send(e) {
       let objData1 = {
         bookpic: this.data1.bookpic,
