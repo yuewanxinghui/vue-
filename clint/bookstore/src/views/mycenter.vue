@@ -27,23 +27,23 @@
 					this.infos = data.data[0]
 				})
 		},
-		updated() {
-			let loading = localStorage.getItem('loading'); //loading是当前登录的id
-			console.log(loading)
-			this.$axios.post('/user', {
-					id: loading
-				})
-				.then((data) => {
-					console.log(data)
-					this.infos = data.data[0]
-				})
-		}
+		// updated() {
+		// 	let loading = localStorage.getItem('loading'); //loading是当前登录的id
+		// 	console.log(loading)
+		// 	this.$axios.post('/user', {
+		// 			id: loading
+		// 		})
+		// 		.then((data) => {
+		// 			console.log(data)
+		// 			this.infos = data.data[0]
+		// 		})
+		// }
 	}
 </script>
 
 <style scoped="scoped">
 	#box {
-		width: 1200px;
+		width: 100%;
 		margin: 0 auto;
 	}
 </style>

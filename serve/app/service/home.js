@@ -39,9 +39,9 @@ class HomeService extends Service {
 		const {
 			ctx
 		} = this;
-		let sql = `UPDATE book SET price=${e.price},active='${e.active}' WHERE id=${e.id}`;
+		let sql = `UPDATE book SET price=${e.price},active='${e.active}' WHERE bid=${e.id}`;
 		let result1 = await ctx.app.mysql.query(sql);
-		console.log(result1);
+		// console.log(result1);
 		return result1;
 	}
 
@@ -63,7 +63,7 @@ class HomeService extends Service {
 		} = this;
 		let sql = `select * from book WHERE bookname LIKE '%${e.likeword}%'`;
 		let result1 = await ctx.app.mysql.query(sql);
-		// console.log(result1);
+		// console.log(result1,9999999999999);
 		if(result1[0]){
 		return result1;
 		}else{

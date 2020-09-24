@@ -31,20 +31,24 @@
 				this.$router.push('/zhuce');
 			},
 			send() {
+				console.log(5555)
 				if (this.zhanghao !== '' && this.pwd !== '') {
+					console.log(44444)
 					this.$axios.post('/userlogin', {
 							zhanghao: this.zhanghao,
 							pwd: this.pwd
 						})
 						.then((data) => {
-							console.log(data)
+							console.log(data, 6666666666)
 							// console.log(JSON.parse(data.config.data))
-							let loading = data.data[0].id;
-							let admin = data.data[0].admin;
-							console.log(loading)
 							if (data.data.code == 1001) {
 								console.log('账号或密码错误')
+							} else if (data.data.code == 1002) {
+								console.log('请先注册')
 							} else {
+								let loading = data.data[0].id;
+								let admin = data.data[0].admin;
+								console.log(loading)
 								if (admin) {
 									localStorage.setItem("isLogin", 1);
 									localStorage.setItem("admin", admin);
@@ -71,6 +75,7 @@
 	}
 
 	.di {
+		color: white;
 		width: 100%;
 		height: 50px;
 		background-color: #55A6AB;

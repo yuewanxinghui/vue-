@@ -1,13 +1,15 @@
 <template>
 	<div class="box">
+		<div class="welcome">欢迎来到檀香墨坊，您现在所在的位置是 个人中心</div>
 		<div class='info'>
 			<div class="userimg">
 				<img :src="info.userimg" alt="">
 			</div>
-			<span>{{info.name}}</span>
+			<div class="name">{{info.name}}</div>
 		</div>
+		
 		<div class='time'>{{nowtime|timetool}}</div>
-		<div class='exit' @click="clearcook">exit</div>
+		<div class='exit' @click="clearcook">退出登录</div>
 	</div>
 </template>
 
@@ -55,40 +57,67 @@
 
 <style scoped="scoped">
 	.box {
-		width: 1200px;
-		height: 100px;
+		width: 100%;
+		height: 60px;
 		display: flex;
+		color: white;
+		background-color: #55A6AB;
+		margin: auto;
+		border-bottom: 10px solid #F1F1F1;
 	}
 
 	.info {
-		width: 500px;
-		height: 100px;
-		background-color: #00FFFF;
+		width: 630px;
+		height: 60px;
+		line-height: 60px;
+		text-align: right;
+		position: relative;
+	}
+	
+	.name{
+		display: inline-block;
+		height: 60px;
+		line-height: 60px;
+		position: absolute;
+		left: 80%;
+	}
+	
+	.userimg{
+		display: inline-block;
 	}
 
 	.userimg img {
-		width: 60px;
-		height: 60px;
+		width: 40px;
+		height: 40px;
 		border-radius: 50%;
+		position: absolute;
+		left: 70%;
+		top: 0;
+		margin-top: 10px;
+	}
+	
+	.welcome{
+		height: 60px;
+		text-align: center;
+		line-height: 60px;
+		padding: 0 40px;
 	}
 
 	.time {
-		width: 400px;
-		height: 100px;
-		background-color: #888888;
+		width: 300px;
+		height: 60px;
 		text-align: center;
-		line-height: 100px;
-		font-size: 18px;
-		color: greenyellow;
+		line-height: 60px;
 	}
 
 	.exit {
-		width: 300px;
-		height: 100px;
-		background-color: #abcdef;
+		width: 150px;
+		height: 60px;
 		text-align: center;
-		line-height: 100px;
-		font-size: 16px;
-		color: greenyellow;
+		line-height: 60px;
+	}
+	
+	.exit:hover{
+		color: red;
 	}
 </style>

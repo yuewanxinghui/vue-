@@ -60,7 +60,7 @@ const routes = [{
 	},
 	{
 		path: '/xiangqing',
-		component: () => import('../views/xiangqing.vue')
+		component: () => import('../components/sxf/goods.vue')
 	},
 
 
@@ -68,6 +68,10 @@ const routes = [{
 		path: '/table1',
 		component: () => import('../components/ljm/table1.vue'),
 	},
+	{
+		path: '/car',
+		component: () => import('../components/zsx/car.vue'),
+	}
 ]
 
 

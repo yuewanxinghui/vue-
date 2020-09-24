@@ -103,6 +103,7 @@
 		font-family: 宋体;
 		box-sizing: border-box;
 		padding-top: 17px;
+		color: white;
 	}
 
 	.box {

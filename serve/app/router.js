@@ -18,6 +18,7 @@ module.exports = app => {
   router.post('/userzhuce', controller.user.userzhuce);
   router.get('/verif', controller.user.verif);//验证码
   router.post('/user', controller.user.user);//获取用户信息
+  router.post('/userall', controller.user.userall);//获取用户信息所有
   router.post('/changeuser', controller.user.changeuser);//更改用户信息
   router.post('/like', controller.home.like);//模糊查询
   
