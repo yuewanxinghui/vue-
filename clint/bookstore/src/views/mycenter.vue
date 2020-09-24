@@ -18,23 +18,23 @@
 		},
 		mounted() {
 			let loading = localStorage.getItem('loading'); //loading是当前登录的id
-			console.log(loading)
+			// console.log(loading)
 			this.$axios.post('/user', {
 					id: loading
 				})
 				.then((data) => {
-					console.log(data)
+					// console.log(data)
 					this.infos = data.data[0]
 				})
 		},
 		updated() {
 			let loading = localStorage.getItem('loading'); //loading是当前登录的id
-			console.log(loading)
+			// console.log(loading)
 			this.$axios.post('/user', {
 					id: loading
 				})
 				.then((data) => {
-					console.log(data)
+					// console.log(data)
 					this.infos = data.data[0]
 				})
 		}

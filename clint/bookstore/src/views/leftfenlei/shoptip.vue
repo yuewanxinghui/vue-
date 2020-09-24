@@ -20,7 +20,7 @@ export default {};
 <style >
 .shoptip {
   width: 230px;
-  height: 553px;
+  height: 500px;
   background-color: #fff;
   opacity: 0.6;
   z-index: 2;

@@ -5,28 +5,48 @@
       <div class="navleft">
         <router-link class="navbtn" to="/Login">欢迎光临檀墨香坊</router-link>
         <router-link class="navbtn" to="/center">个人中心</router-link>
-        <router-link class="navbtn" to="/Login">购物车</router-link>
+        <router-link class="navbtn" to="/">购物车</router-link>
       </div>
       <div class="navright">
-        <div>
-          <router-link class="navbtn" to="/login">{{login}}</router-link>
-          <router-link class="navbtn" to="/zhuce">{{zhuce}}</router-link>
+        <div class="navright1">
+          <router-link class="navbtn" to="/login">{{ login }}</router-link>
+          <img
+            @click="tocenter()"
+            v-show="flag1"
+            :src="pic"
+            :class="{ picclass }"
+            alt=""
+          />
+          <span v-show="flag2" @click="tocenter()">{{zhuce}}</span>
+          <router-link v-show="flag3" class="navbtn"  @click="tocenter()" to="/zhuce">{{ zhuce }}</router-link>
         </div>
-        <router-link class="navbtn" to="/Login">帮助</router-link>
+        <router-link class="navbtn" to="/Home/help">帮助</router-link>
       </div>
     </nav>
     <header>
       <div>
         <img src="../assets/logo.png" alt />
       </div>
+
       <div class="search">
-        <input type="text" placeholder="搜索书籍" />
-        <router-link class="headersearch" to="/Home">搜索</router-link>
+        <input
+          type="text"
+          placeholder="搜索书籍"
+          @input="sendsearch($event)"
+          v-model="search"
+          @blur="dispal"
+        />
+        <search v-if="flag"></search>
+        <router-link class="headersearch" to="/" @click="tosearch"
+          >搜索</router-link
+        >
       </div>
     </header>
     <section class="section">
       <div class="Allclassify">
-        <router-link class="classify classify1" to="/Login">商品分类</router-link>
+        <router-link class="classify classify1" to="/Login"
+          >商品分类</router-link
+        >
         <router-link class="classify" to="/Home">首页</router-link>
         <router-link class="classify" to="/wenxue">文学</router-link>
         <router-link class="classify" to="/sheke">社科</router-link>
@@ -40,34 +60,18 @@
         <shoptip class="shoptip" @click="toshoptip()"></shoptip>
       </div>
       <section class="hotsale">
-        <img src="http://image31.bookschina.com/pro-images/newtejia/292120.jpg" alt srcset />
+        <img
+          src="http://image31.bookschina.com/pro-images/newtejia/292120.jpg"
+          alt
+          srcset
+        />
       </section>
       <section class="section2">
-        <addcar v-for="el in arr" :data1='el'></addcar>
+        <addcar v-for="el in arr" :data1="el"></addcar>
       </section>
-      <footer>
-        <router-link class="footerxq" to="xiangqing">关于我们</router-link>
-        <router-link class="footerxq" to="xiangqing">帮助中心</router-link>
-        <router-link class="footerxq" to="xiangqing">开放平台</router-link>
-        <router-link class="footerxq" to="xiangqing">联系我们</router-link>
-        <router-link class="footerxq" to="xiangqing">法律规则</router-link>
-        <router-link class="footerxq" to="xiangqing">隐私政策</router-link>
-        <router-link class="footerxq" to="xiangqing">知识产权</router-link>
-        <div>
-          <span>开发团队：</span>
-          <router-link class="footerxq" to="xiangqing">爱咋咋滴</router-link>
-        </div>
-        <div>
-          <span>开发成员：</span>
-          <router-link class="footerxq" to="xiangqing">陈玉峰</router-link>
-          <router-link class="footerxq" to="xiangqing">尚晓飞</router-link>
-          <router-link class="footerxq" to="xiangqing">陈昱晔</router-link>
-          <router-link class="footerxq" to="xiangqing">刘江敏</router-link>
-          <router-link class="footerxq" to="xiangqing">詹烁鑫</router-link>
-          <router-link class="footerxq" to="xiangqing">万光花</router-link>
-        </div>
-      </footer>
+      <footer1></footer1>
     </section>
+
     <!-- <router-view></router-view> -->
   </div>
 </template>
@@ -86,39 +90,76 @@ export default {
       zhuce: "注册",
       pic: "",
       zhanhao: "",
+      search: "",
+      search1: "",
+      flag: false,
+      userid: "",
+      picclass: true,
+      flag1: false,
+      flag2:false,
+      flag3:true
     };
   },
   components: {
     lunbo: () => import("@/components/wgh/lunbo.vue"),
     shoptip: () => import("@/views/leftfenlei/shoptip.vue"),
     addcar: () => import("@/components/wgh/addcar.vue"),
+    search: () => import("@/views/wgh/search.vue"),
+    footer1: () => import("@/components/wgh/footer1.vue"),
   },
   methods: {
+    tocenter() {
+      this.$router.push("/center");
+    },
     fn() {
       this.$router.push("/xiangqing");
     },
     toshoptip() {
       this.$router.push("/Home/shoptip");
     },
-
-   
+    dispal() {
+      this.flag = false;
+    },
+    async sendsearch(e) {
+      this.flag = true;
+      let f = new FormData();
+      f.append("likeword", this.search);
+      var res1 = await this.$axios.post("/like", f, {
+        header: { "content-Type": "application/x-www-form-urlencoded" },
+      });
+      console.log(res1, 66666);
+    },
   },
 
   async created() {
     var res = await axios.get("/test");
     this.arr = res.data;
 
-    // var res1 = await axios.post("/likeword");
-    // console.log(res1);
-
+    let loading = localStorage.getItem("loading"); //loading是当前登录的id
     var flag = localStorage.getItem("isLogin");
-    if (flag) {
-      this.login = "头像";
-      this.zhuce = "账号";
-    } else {
-      this.login = "登录";
-      this.zhuce = "注册";
-    }
+    console.log(loading, 2222222);
+    this.$axios
+      .post("/user", {
+        id: loading,
+      })
+      .then((data) => {
+        this.userid = data.data[0];
+        console.log(this.userid, 1111111111);
+        if (flag) {
+          this.login = "";
+          this.zhuce = this.userid.zhanghao;
+          this.pic = this.userid.userimg;
+          this.flag1 = true;
+          this.flag2 = true;
+          this.flag3 = false;
+        } else {
+          this.login = "登录";
+          this.zhuce = "注册";
+          this.flag1 = false;
+          this.flag2 = false;
+          this.flag3 = true;
+        }
+      });
   },
 };
 </script>
@@ -127,6 +168,23 @@ export default {
 * {
   margin: 0;
   padding: 0;
+}
+.picclass {
+  margin-top: 5px;
+  width: 40px;
+  height: 40px;
+  background-color: #ccc;
+  border-radius: 40px;
+  margin-right: 20px;
+}
+.navright1 span{
+  font-size: 12px;
+  color: #fff;
+  line-height: 45px;
+}
+.navright1 {
+  display: flex;
+  justify-items: center;
 }
 nav {
   display: flex;
@@ -162,7 +220,6 @@ header img {
   height: 200px;
 }
 header input {
-  text-align: center;
   width: 400px;
   height: 45px;
   box-sizing: border-box;
@@ -170,7 +227,6 @@ header input {
 }
 header .search input:focus {
   outline: none;
-
   border: 1px solid red;
 }
 .search {
@@ -272,7 +328,7 @@ section {
   font-weight: bold;
   color: red;
 }
-
+/* 
 footer {
   border-top: 4px solid #55a6ab;
   height: 200px;
@@ -288,5 +344,5 @@ footer .footerxq {
   margin: 0 20px;
   color: #ffff;
   font-size: 14px;
-}
+} */
 </style>

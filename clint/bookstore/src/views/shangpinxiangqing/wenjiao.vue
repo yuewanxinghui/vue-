@@ -7,6 +7,7 @@
     <div class="wenxue">
       <wenjiao v-for="el in arr" :data1="el"></wenjiao>
     </div>
+    <footer1></footer1>
   </div>
 </template>
 <script>
@@ -20,7 +21,8 @@ export default {
     };
   },
   components:{
-    wenjiao:()=>import("@/components/wgh/wenjiao.vue")
+    wenjiao:()=>import("@/components/wgh/wenjiao.vue"),
+    footer1: () => import("@/components/wgh/footer1.vue"),
   },
   async created() {
     var res = await axios.get("/test");

@@ -7,6 +7,7 @@
     <div class="wenxue">
       <shenghuo v-for="el in arr" :data1="el"></shenghuo>
     </div>
+    <footer1></footer1>
   </div>
 </template>
 <script>
@@ -21,6 +22,7 @@ export default {
   },
   components:{
     shenghuo: () => import("@/components/wgh/shenghuo.vue"),
+    footer1: () => import("@/components/wgh/footer1.vue"),
   },
   async created() {
     var res = await axios.get("/test");

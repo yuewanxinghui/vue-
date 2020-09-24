@@ -7,6 +7,7 @@
     <div class="wenxue">
       <sheke  v-for="el in arr" :data1="el"></sheke>
     </div>
+    <footer1></footer1>
   </div>
 </template>
 <script>
@@ -21,6 +22,7 @@ export default {
   },
    components: {
     sheke: () => import("@/components/wgh/sheke.vue"),
+    footer1: () => import("@/components/wgh/footer1.vue"),
   },
   async created() {
     var res = await axios.get("/test");

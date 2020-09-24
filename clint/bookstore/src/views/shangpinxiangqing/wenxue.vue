@@ -1,12 +1,16 @@
 <template>
-  <div class="wen">
-    <div class="nav">
-      <p>文学类书籍</p>
-      <router-link class="backhome" to="/Home">返回主页</router-link>
+  <div>
+    <div class="wen">
+      <div class="nav">
+        <p>文学类书籍</p>
+        <router-link class="backhome" to="/Home">返回主页</router-link>
+      </div>
+      <div class="wenxue">
+        <wenxue v-for="el in arr" :data1="el"></wenxue>
+      </div>
     </div>
-    <div class="wenxue">
-      <wenxue v-for="el in arr" :data1="el"></wenxue>
-    </div>
+    <footer1></footer1>
+    
   </div>
 </template>
 <script>
@@ -21,6 +25,7 @@ export default {
   },
   components: {
     wenxue: () => import("@/components/wgh/wenxue.vue"),
+    footer1: () => import("@/components/wgh/footer1.vue"),
   },
   async created() {
     var res = await axios.get("/test");
@@ -30,6 +35,7 @@ export default {
 };
 </script>
 <style >
+
 .wen {
   background-image: url(http://pic.sc.chinaz.com/files/pic/pic9/202008/apic26944.jpg);
 }
@@ -47,7 +53,7 @@ export default {
 }
 .wenxue {
   width: 1000px;
-  height: auto;
+  height: 600px;
   margin: 0 auto;
 }
 .wenxue {

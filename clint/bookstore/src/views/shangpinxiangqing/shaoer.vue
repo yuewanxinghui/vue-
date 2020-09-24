@@ -7,6 +7,7 @@
     <div class="wenxue">
       <shaoer v-for="el in arr" :data1="el"></shaoer>
     </div>
+    <footer1></footer1>
   </div>
 </template>
 <script>
@@ -19,8 +20,9 @@ export default {
       arr: [],
     };
   },
-    components: {
+  components: {
     shaoer: () => import("@/components/wgh/shaoer.vue"),
+    footer1: () => import("@/components/wgh/footer1.vue"),
   },
   async created() {
     var res = await axios.get("/test");
@@ -47,7 +49,7 @@ export default {
 }
 .wenxue {
   width: 1000px;
-  height: auto;
+  height: 600px;
   margin: 0 auto;
 }
 .wenxue {

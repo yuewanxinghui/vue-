@@ -5,70 +5,67 @@ import Home from '../views/Home.vue'
 Vue.use(VueRouter);
 
 const routes = [{
-		path: '/',
-		component: Home
-	},
-	{
-		path: '/Home',
-		component: () => import('../views/Home.vue'),
-		// children: [
-		// 	{
-		// 		path: 'shoptip',
-		// 		component: () => import('../views/leftfenlei/shoptip.vue'),
-		// 		children: [{
-		// 			path: 'wx1',
-		// 			component: () => import('../views/leftfenlei/wx.vue')
-		// 		}]
-		// 	}
-		// ]
-	},
-	{
-		path: '/wenxue',
-		component: () => import('../views/shangpinxiangqing/wenxue.vue')
-	},
-	{
-		path: '/sheke',
-		component: () => import('../views/shangpinxiangqing/sheke.vue')
-	},
-	{
-		path: '/shaoer',
-		component: () => import('../views/shangpinxiangqing/shaoer.vue')
-	},
-	{
-		path: '/yishu',
-		component: () => import('../views/shangpinxiangqing/yishu.vue')
-	},
-	{
-		path: '/shenghuo',
-		component: () => import('../views/shangpinxiangqing/shenghuo.vue')
-	},
-	{
-		path: '/wenjiao',
-		component: () => import('../views/shangpinxiangqing/wenjiao.vue')
-	},
-	{
-		path: '/center',
-		component: () => import('../views/mycenter.vue')
-	},
-	{
-		path: '/login',
-		component: () => import('../views/login.vue')
-	},
-	{
-		path: '/zhuce',
-		component: () => import('../views/zhuce.vue')
-	},
-	{
-		path: '/xiangqing',
-		component: () => import('../views/xiangqing.vue')
-	},
-<<<<<<< HEAD
-=======
-	{
-		path: '/table1',
-		component: () => import('../components/ljm/table1.vue'),
-	},
->>>>>>> 2acd1a3a183da2bab7b8d4279f02d8fa69385f92
+	path: '/',
+	component: Home
+},
+{
+	path: '/Home',
+	component: () => import('../views/Home.vue'),
+
+	children: [
+		{
+			path: 'search',
+			component: () => import('../views/wgh/search.vue')
+		},
+	]
+},
+
+
+{
+	path: '/wenxue',
+	component: () => import('../views/shangpinxiangqing/wenxue.vue'),
+},
+{
+	path: '/sheke',
+	component: () => import('../views/shangpinxiangqing/sheke.vue')
+},
+{
+	path: '/shaoer',
+	component: () => import('../views/shangpinxiangqing/shaoer.vue')
+},
+{
+	path: '/yishu',
+	component: () => import('../views/shangpinxiangqing/yishu.vue')
+},
+{
+	path: '/shenghuo',
+	component: () => import('../views/shangpinxiangqing/shenghuo.vue')
+},
+{
+	path: '/wenjiao',
+	component: () => import('../views/shangpinxiangqing/wenjiao.vue')
+},
+{
+	path: '/center',
+	component: () => import('../views/mycenter.vue')
+},
+{
+	path: '/login',
+	component: () => import('../views/login.vue')
+},
+{
+	path: '/zhuce',
+	component: () => import('../views/zhuce.vue')
+},
+{
+	path: '/xiangqing',
+	component: () => import('../views/xiangqing.vue')
+},
+
+{
+	path: '/table1',
+	component: () => import('../components/ljm/table1.vue'),
+},
 
 ];
 
@@ -83,22 +80,24 @@ router.beforeEach((to1, from1, next) => {
 		next();
 	} else {
 		let flag = localStorage.getItem('isLogin');
-<<<<<<< HEAD
+
 		// console.log(flag)
 		if (flag) {
 			next();
-=======
-		let admin = localStorage.getItem("admin");
-		console.log(flag, admin)
-		if (admin == 1) {
-			next()
-		} else if (flag == 1) {
-			next();
-		} else if (flag == 0) {
-			next('/login')
->>>>>>> 2acd1a3a183da2bab7b8d4279f02d8fa69385f92
-		} else {
-			next('/login')
+
+			let admin = localStorage.getItem("admin");
+			// console.log(flag, admin)
+			if (admin == 1) {
+				next()
+			} else if (flag == 1) {
+				next();
+			} else if (flag == 0) {
+				next('/login')
+
+			} else {
+				next('/login')
+			}
+
 		}
 	}
 })

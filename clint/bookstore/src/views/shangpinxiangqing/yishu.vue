@@ -7,7 +7,9 @@
     <div class="wenxue">
       <yishu v-for="el in arr" :data1='el'></yishu>
     </div>
+    <footer1></footer1>
   </div>
+  
 </template>
 <script>
 import axios from "axios";
@@ -20,7 +22,8 @@ export default {
     };
   },
   components:{
-    yishu:()=>import("@/components/wgh/yishu.vue")
+    yishu:()=>import("@/components/wgh/yishu.vue"),
+    footer1: () => import("@/components/wgh/footer1.vue"),
   },
   async created() {
     var res = await axios.get("/test");
