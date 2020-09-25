@@ -5,13 +5,15 @@
        <div class="topchilden1">
        <img src="@/assets/logo.png" alt="" class="imgsize"></div>  
         
-      <div class="topchilden2"> <span>檀墨香坊后台管理系统</span> <div  class="leave"><button @click="leave" >退出登录</button></div></div>
+      <div class="topchilden2"> <span class="span2">欢迎登陆</span> <span class="span1">檀墨香坊后台管理系统</span> <div  class="leave"><button @click="leave" class="leavebtn">退出登录</button></div></div>
       </div>   
      <div class="content">
      <div class="left">
       <div class="bottonbox1"><button class="button1" @click="content1('add')">添加</button></div>
       <div class="bottonbox2"><button class="button2" @click="content1('table1')">查询全部</button></div> 
-      <div class="bottonbox3"><button class="button3" @click="content1('updata')">更新数据</button></div>   
+      <div class="bottonbox3"><button class="button3" @click="content1('updata')">更新数据</button></div>
+        <div class="bottonbox4"><button class="button4" @click="content1('um')">用户管理</button></div>
+        
      </div>     
      <div class="right">
       <!-- 组件切换的地方 -->
@@ -24,32 +26,38 @@
 import table1 from "./zujian/content1.vue"
 import add from "./zujian/add.vue"
 import updata from "./zujian/updata.vue"
+import um from "./zujian/user-management.vue"
 export default {
   data() {
     return {   
      
        content:"",
+      
+       
        
     };
   },
   components:{
     table1:table1,
     add:add,
-    updata:updata
+    updata:updata,
+    um:um
   },
   mounted() {
-      //   this.$axios.get("http://192.168.3.124:7001/test")
-      // .then((res)=>{
-      
-      //     this.tableData=res.data
-       
-      // })
+       var id=localStorage.getItem('loading');  
+        this.$axios.post("http://192.168.3.124:7001/user",{id:id})
+         .then((res)=>{             
+          console.log(res)
+          console.log(localStorage.getItem('loading')) 
+     
+      })
    
   },
   // updated() {
-  //      this.$axios.get("http://192.168.3.124:7001/test")
+  //      this.$axios.get("http://192.168.3.124:7001/test",)
   //     .then((res)=>{
-  //     this.tableData=res.data
+     
+  
       
   //     })
   // },
@@ -71,7 +79,8 @@ export default {
   },
 };
 </script>
-<style>
+
+<style >
 .content{
   width: 100%;
     height: 100%;
@@ -93,8 +102,7 @@ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans
   margin-top: 2px;
   width: 100px; 
   background-color:  #7DBBF9;  
-  
- margin-top: -11px;
+   margin-top: -21px;
 
  
 }
@@ -103,8 +111,7 @@ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans
    width: 100px;
    height: 100px;
    border-radius: 50%;
-   background-color: #459DF6;
-   
+   background-color: #459DF6;   
    margin-top: 25px;
 
   
@@ -125,9 +132,6 @@ justify-content: space-between;
 }
 .rigth{
   width: 1000px;
-
-
-
 }
 
 button{
@@ -139,11 +143,14 @@ button{
   color: #ffffff; 
   text-align: center;
 border-radius: 6px;
+
+
+
 }
 .button1{
-width: 40px;
+ width: 40px;
  height: 40px;
-   background-color:  #7DBBF9;
+background-color:  #7DBBF9;
 
 
 }
@@ -151,8 +158,13 @@ width: 40px;
   width: 70px;
   margin-bottom: 10px;
 }
-.button2{
+.button3{
   width: 70px;
+   margin-bottom: 10px;
+}
+.button4{
+  width: 70px;
+   margin-bottom: 10px;
 }
 .leave
 {
@@ -169,6 +181,19 @@ width: 40px;
   height: 100px;
  margin-left: -11px;
  margin-top: 12px;
+}
+.leavebtn{
+  background-color: #459DF6;
+}
+.span1{
+  font-size: 20px;
+  margin-left: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ 
+}
+.span2{
+ width: 100px;
+ 
 }
 
 </style>
