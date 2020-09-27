@@ -1,5 +1,5 @@
 <template>
-<div class="eltable">
+<div>
     <el-table  :data="tableData" border style="width: 1000px" header-align="center" >
     <el-table-column fixed prop="bid" label="序号" width="70" >
 
@@ -60,13 +60,13 @@ export default {
       })
    
   },
-  //  updated() {
-  //      this.$axios.get("http://192.168.3.124:7001/test")
-  //     .then((res)=>{
-  //     this.tableData=res.data
+   updated() {
+       this.$axios.get("http://192.168.3.124:7001/test")
+      .then((res)=>{
+      this.tableData=res.data
       
-  //     })
-  // },
+      })
+  },
   methods: {
       handleClick(row) {
       console.log(row);
@@ -89,10 +89,7 @@ export default {
 }
 }
 </script>
-<style  scoped>
-.eltable{
-  margin-left: 60px;
- 
-}
+<style >
+
 
 </style>

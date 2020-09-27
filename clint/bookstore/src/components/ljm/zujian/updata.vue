@@ -1,7 +1,7 @@
 <template>
-<div class="updatacontent">
+<div>
 <div class="head">
-  <div class="headleft">请输入你要查询的id号：<input type="text" v-model="id" class="bb" ></div>
+  <div class="headleft">请输入你要查询的id号：<input type="text" v-model="id" class="aa" ></div>
   <div class="headright">  <button  @click="look">查询</button> </div>
 
    <!-- <button @click="submit">上传</button> -->
@@ -22,22 +22,22 @@
          <tbody :data="data1" v-for="el in data1">
           <tr>
             <th>
-              <input type="text" v-model="el.bid"  class="aa" />
+              <input type="text" v-model="el.bid"  />
             </th>
             <th>
-              <input type="text" v-model="el.bookname"   class="aa" />
+              <input type="text" v-model="el.bookname"  />
             </th>
             <th>
-              <input type="text" v-model="el.active"   class="aa"  />
+              <input type="text" v-model="el.active"  />
             </th>
             <th>
-              <input type="text" v-model="el.bookwriter"    class="aa"/>
+              <input type="text" v-model="el.bookwriter"  />
             </th>
             <th >
-              <input type="text" v-model="el.price"  class="aa" />
+              <input type="text" v-model="el.price" />
             </th>
             <th>
-              <input type="text" v-model="el.tid"   class="aa" />
+              <input type="text" v-model="el.tid"  />
             </th>
              <th>            
                   <img :src="el.bookpic"  class="img1"/>
@@ -86,10 +86,10 @@ export default {
         submit() {
           var url="http://192.168.3.124:7001/updata";
              let transfer = new FormData();
-            //  transfer.append("active", this.active);
-             transfer.append("price", this.data1[0].price);
-            transfer.append("active", this.data1[0].active);
-            transfer.append("id", this.id);
+             transfer.append("active", this.active);
+             transfer.append("price", this.price);
+              transfer.append("bid", this.active);
+             transfer.append("id", this.id);
              this.$axios.post(url, transfer, {
           header: {
             "content-Type": "application/x-www-form-urlencoded",
@@ -126,12 +126,12 @@ td {
 th{
   width: 50px;
 }
-/* input {
+input {
   outline: none;
   border: none;
   width: 40px;
   height: 40px;
-} */
+}
 .head{
  width: 1000px;
   height: 60px;
@@ -141,10 +141,7 @@ justify-content: space-between;
   
 }
 .headleft{
-  width:950px;
-}
-.headright{
-  margin-left: -2px;
+  width: 1200px;
 }
 .content{
   width: 1000px;
@@ -152,24 +149,7 @@ justify-content: space-between;
   justify-content: flex-start;
 }
 .contentbox1{
-  width: 1450px;
+  width: 1500px;
   margin: 10px;
-  }
-  .updatacontent{
-  margin-left: 50px;
-   border: 1px solid #459DF6;
-   height: 100%;
-  }
-  .aa{
-   
- outline: none;
-  border: none;
-  width: 40px;
-  height: 40px;
-  }
-  .bb:focus{
-    border: 1px solid  #459DF6;
-    outline: none;
-
   }
 </style>

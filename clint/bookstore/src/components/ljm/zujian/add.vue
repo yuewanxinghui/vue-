@@ -1,6 +1,6 @@
 <template>
   <div class="table2box">
-    <div class="boxchild">
+    <div>
       <table>
         <thead>
           <th  width="50px">序号</th>
@@ -14,7 +14,7 @@
         <tbody>
           <tr>
             <th>
-              <input type="text" v-model="bid" />
+              <input type="text" v-model="bid" width="50px"/>
             </th>
             <th>
               <input type="text" v-model="bookname" />
@@ -106,10 +106,6 @@ export default {
 };
 </script>
 <style scoped>
-table{
-  
-  margin-left: 300px;
-}
 table,
 th,
 td {
@@ -120,13 +116,12 @@ td {
 th,
 td {
   padding: 2px;
-  height: 40px;
 }
 input {
   outline: none;
   border: none;
-  width: 60px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
 }
 .submitbox {
   width: 50px;
@@ -140,9 +135,6 @@ input {
 .table2box {
   display: flex;
   justify-content: flex-start;
-  border: 1px solid #459DF6;
-  height: 300px;
-  margin-left: 240px;
 }
 .img1{
     width: 50px;
@@ -151,13 +143,5 @@ input {
 .thbox{
     display: flex;
     justify-content: flex-start;
-}
-tr{
-  height: 40px;
-}
-table{
-  margin-top: 10px;
-  margin-left: 50px;
-  
 }
 </style>
