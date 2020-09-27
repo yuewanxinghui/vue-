@@ -27,19 +27,19 @@
 					this.infos = data.data[0]
 				})
 		},
-<<<<<<< HEAD
-		updated() {
-			let loading = localStorage.getItem('loading'); //loading是当前登录的id
-			// console.log(loading)
-			this.$axios.post('/user', {
-					id: loading
-				})
-				.then((data) => {
-					// console.log(data)
-					this.infos = data.data[0]
-				})
-		}
-=======
+
+		// updated() {
+		// 	let loading = localStorage.getItem('loading'); //loading是当前登录的id
+		// 	// console.log(loading)
+		// 	this.$axios.post('/user', {
+		// 			id: loading
+		// 		})
+		// 		.then((data) => {
+		// 			// console.log(data)
+		// 			this.infos = data.data[0]
+		// 		})
+		// }
+
 		// updated() {
 		// 	let loading = localStorage.getItem('loading'); //loading是当前登录的id
 		// 	console.log(loading)
@@ -51,7 +51,6 @@
 		// 			this.infos = data.data[0]
 		// 		})
 		// }
->>>>>>> 847407f25882227193a3ca01a91ce8eb45398ffd
 	}
 </script>
 

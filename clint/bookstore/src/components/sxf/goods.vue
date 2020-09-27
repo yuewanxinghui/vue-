@@ -46,7 +46,7 @@
 				top: -300, //marks下移位置
 				leftLgImg: 0, //大图lgImg移动的位置
 				topLgImg: -300, //大图lgImg移动的位置
-				everygoods:'',
+				everygoods: '',
 			};
 		},
 		methods: {
@@ -101,8 +101,7 @@
 				}
 			},
 		},
-		beforeCreate(){
-		},
+		beforeCreate() {},
 		mounted() {
 			this.everygoods = this.$route.query;
 			if (
