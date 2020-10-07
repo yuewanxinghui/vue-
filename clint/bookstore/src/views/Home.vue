@@ -9,11 +9,20 @@
       </div>
       <div class="navright">
         <div class="navright1">
+          <img
+            @click="tocenter()"
+            v-show="flag1"
+            :src="pic"
+            :class="{ picclass }"
+            alt=""
+          />
           <router-link class="navbtn" to="/login">{{ login }}</router-link>
-          <img @click="tocenter()" :src="pic" :class="{ picclass }" alt="" />
-          <router-link class="navbtn" to="/login">{{ zhuce }}</router-link>
+          <router-link class="navbtn" to="/zhuce">{{ zhuce }}</router-link>
         </div>
         <router-link class="navbtn" to="/Home/help">帮助</router-link>
+        <span class="navbtn" to="/Home" @click="clearcook" v-show="flag2">
+          退出登录
+        </span>
       </div>
     </nav>
     <header>
@@ -88,7 +97,8 @@ export default {
       flag: false,
       userid: "",
       picclass: true,
- 
+      flag1: false,
+      flag2: false,
     };
   },
   components: {
@@ -99,6 +109,12 @@ export default {
     footer1: () => import("@/components/wgh/footer1.vue"),
   },
   methods: {
+    clearcook() {
+      localStorage.setItem("loading", null);
+      localStorage.setItem("isLogin", 0);
+      localStorage.setItem("admin", 0);
+    },
+
     tocenter() {
       this.$router.push("/center");
     },
@@ -128,7 +144,6 @@ export default {
   async created() {
     var res = await axios.get("/test");
     this.arr = res.data;
-
     let loading = localStorage.getItem("loading"); //loading是当前登录的id
     var flag = localStorage.getItem("isLogin");
     console.log(loading, 2222222);
@@ -140,14 +155,15 @@ export default {
         this.userid = data.data[0];
         console.log(this.userid, 1111111111);
         if (flag) {
-          this.login = "";
           this.zhuce = this.userid.zhanghao;
           this.pic = this.userid.userimg;
-      
+          this.flag1 = true;
+          this.flag2 = true;
+          this.login = "";
         } else {
           this.login = "登录";
           this.zhuce = "注册";
-         
+          this.flag2 = false;
         }
       });
   },
